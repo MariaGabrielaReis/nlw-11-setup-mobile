@@ -1,9 +1,12 @@
 import { View, Text } from 'react-native';
 
+import { generateDatesFromYearBeginning } from '../utils/generate-dates-from-year-beginning';
+
 import { HabitDay, DAY_SIZE } from '../components/HabitDay';
 import { Header } from '../components/Header';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+const datesFromYearStart = generateDatesFromYearBeginning();
 
 export function Home() {
   return (
@@ -23,7 +26,12 @@ export function Home() {
           );
         })}
       </View>
-      <HabitDay />
+
+      <View className="flex-row flex-wrap">
+        {datesFromYearStart.map(date => (
+          <HabitDay key={date.toISOString()} />
+        ))}
+      </View>
     </View>
   );
 }
