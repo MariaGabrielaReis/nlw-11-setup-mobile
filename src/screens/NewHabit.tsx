@@ -13,13 +13,13 @@ import { BackButton } from '../components/BackButton';
 import { Checkbox } from '../components/Checkbox';
 
 const weekDaysNames = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
+  'Domingo',
+  'Segunda',
+  'Terça',
+  'Quarta',
+  'Quinta',
+  'Sexta',
+  'Sábado',
 ];
 
 export function NewHabit() {
@@ -43,18 +43,18 @@ export function NewHabit() {
       >
         <BackButton />
 
-        <Text className="mt-6 text-white font-bold text-3xl">Create habit</Text>
+        <Text className="mt-6 text-white font-bold text-3xl">Criar hábito</Text>
         <Text className="mt-6 text-white font-semibold text-base">
-          What is your goal?
+          Qual é a sua meta?
         </Text>
         <TextInput
-          placeholder="ex.: do exercises, sleep well..."
+          placeholder="ex.: fazer exercícios, dormir o suficiente..."
           placeholderTextColor={colors.zinc[400]}
           className="h-12 pl-4 rounded-lg mt-3 bg-zinc-800 text-white focus:border-2 focus:border-teal-600"
         />
 
         <Text className="mt-4 mb-3 text-white font-semibold text-base">
-          Which days of the week?
+          Em quais dias da semana?
         </Text>
         {weekDaysNames.map((day, index) => (
           <Checkbox
@@ -70,7 +70,7 @@ export function NewHabit() {
         >
           <Feather name="check" size={20} color={colors.white} />
           <Text className="font-semibold text-base text-white ml-2">
-            Confirm
+            Confirmar
           </Text>
         </TouchableOpacity>
       </ScrollView>
