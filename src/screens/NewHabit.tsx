@@ -5,12 +5,14 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import colors from 'tailwindcss/colors';
 
 import { BackButton } from '../components/BackButton';
 import { Checkbox } from '../components/Checkbox';
+import { api } from '../lib/axios';
 
 const weekDaysNames = [
   'Domingo',
@@ -24,6 +26,7 @@ const weekDaysNames = [
 
 export function NewHabit() {
   const [weekDays, setWeekDays] = useState<number[]>([]);
+  const [title, setTitle] = useState('');
 
   function handleToggleWeekDay(weekDayIndex: number) {
     if (weekDays.includes(weekDayIndex)) {
@@ -32,6 +35,25 @@ export function NewHabit() {
       );
     } else {
       setWeekDays(prevState => [...prevState, weekDayIndex]);
+    }
+  }
+
+  async function handleCreateNewHabit() {
+    try {
+      if (!title.trim() || weekDays.length === 0)
+        Alert.alert(
+          'Novo hábito',
+          'Informe o nome do hábito e escolha sua periodicidade!'
+        );
+
+      await api.post('/habits', { title, weekDays });
+
+      setTitle('');
+      setWeekDays([]);
+      Alert.alert('Novo hábito', 'Hábito cadastrado com sucesso!');
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Ops...', 'Não foi possível criar o novo hábito');
     }
   }
 
@@ -50,6 +72,8 @@ export function NewHabit() {
         <TextInput
           placeholder="ex.: fazer exercícios, dormir o suficiente..."
           placeholderTextColor={colors.zinc[400]}
+          onChangeText={setTitle}
+          value={title}
           className="h-12 pl-4 rounded-lg mt-3 bg-zinc-900 text-white border-2 border-zinc-800 focus:border-teal-600"
         />
 
@@ -65,7 +89,8 @@ export function NewHabit() {
           />
         ))}
         <TouchableOpacity
-          className="w-full h-14 flex-row items-center justify-center bg-teal-600"
+          onPress={handleCreateNewHabit}
+          className="w-full h-14 mt-3 rounded-lg flex-row items-center justify-center bg-teal-600"
           activeOpacity={0.7}
         >
           <Feather name="check" size={20} color={colors.white} />

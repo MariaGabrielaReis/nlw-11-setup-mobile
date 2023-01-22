@@ -34,7 +34,7 @@ export function Home() {
       setSummary(data);
     } catch (error) {
       console.error(JSON.stringify(error));
-      Alert.alert('Ops...', 'Could not load habits summary');
+      Alert.alert('Ops...', 'Não foi possível carregar o sumário de hábitos');
     } finally {
       setLoading(false);
     }
