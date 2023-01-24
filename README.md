@@ -4,7 +4,7 @@
 Site para o projeto HABITS, um app permite criar e acompanhar hábitos através de formulários e checklists diárias ✔️ <br>
 **Aplicação construída no evento Next Level Week: Setup, promovido pela Rocketseat** 🚀
 
-> :hammer_and_wrench: Tecnologias e ferramentas: **TypeScript, React Native, Taildwind, Axios, Dayjs**
+> :hammer_and_wrench: Tecnologias e ferramentas: **TypeScript, React Native, Expo, Taildwind, Axios, Dayjs**
 
 ## :gear: Como rodar
 Com o [Node](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/) e [Git](https://git-scm.com/) instalados, siga o tutorial abaixo:
@@ -41,6 +41,8 @@ $ npm install
 # Execute a aplicação
 $ expo start
 ```
+Use um emulador ou leia o QRCode do terminal por um dispositivo físico <br>
+**OBS.:** o device físico precisa ter o app "Expo Go" e estar na mesma rede que seu computador
 </details>
 
 ## :computer: Demonstração
