@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { ScrollView, View, Text, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import dayjs from 'dayjs';
+import clsx from 'clsx';
+
 import { api } from '../lib/axios';
 import { generateProgressPercent } from '../utils/generate-progress-percentage';
 
@@ -28,6 +30,7 @@ export function Habit() {
   const [completedHabits, setCompletedHabits] = useState<string[]>([]);
 
   const parsedDate = dayjs(date);
+  const isDateInPast = parsedDate.endOf('day').isBefore(new Date());
   const dayOfWeek = parsedDate.format('dddd');
   const dayAndMonth = parsedDate.format('DD/MM');
 
@@ -83,13 +86,18 @@ export function Habit() {
 
         <ProgressBar progress={dayProgress} />
 
-        <View className="mt-6">
+        <View
+          className={clsx('mt-6', {
+            ['opacity-50']: isDateInPast,
+          })}
+        >
           {dayInfo?.possibleHabits ? (
             dayInfo.possibleHabits.map(habit => (
               <Checkbox
                 key={habit.id}
                 title={habit.title}
                 checked={completedHabits.includes(habit.id)}
+                disabled={isDateInPast}
                 onPress={() => handleToggleHabit(habit.id)}
               />
             ))
@@ -97,6 +105,12 @@ export function Habit() {
             <HabitsEmpty />
           )}
         </View>
+
+        {isDateInPast && (
+          <Text className="text-white mt-10 text-center">
+            OBS.: Não é possível editar hábitos de uma data passada!
+          </Text>
+        )}
       </ScrollView>
     </View>
   );
